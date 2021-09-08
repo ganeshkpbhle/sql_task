@@ -1,0 +1,36 @@
+user collection:
+db.user.createIndex({"user_id":1},{unique:true});
+
+db.user.insertMany([{"user_id":101,"name":"hello","mail":"hello@gmail.com"},{"user_id":102,"name":"kpgon","mail":"kpgon@hkl.com"},{"user_id":103,"name":"padma","mail":"padma@ghs.com"},
+{"user_id":104,"name":"klmnjai","mail":"klmnjai@gmail.com"},{"user_id":105,"name":"appaiya","mail":"appaiya@123.com"},{"user_id":106,"name":"chandra","mail":"chandra@chubb.in"}])
+
+company_drive collection:
+db.company_drive.insertMany([{name:"aspire",date:new Date("2020-10-19"),attended_students:["hello","padma","chandra","klmnjai"]},{name:"wipro",date:new Date("2020-10-29"),attended_students:["lekha","padma","kpgon","venkat"]},{name:"mallowtech",date:new Date("2020-10-14"),attended_students:["kpgon","appaiya","hello","klmnjai"]},{name:"Guvi",date:new Date("2020-10-21"),attended_students:["klmnjai","padma","chandra","lekha"]},{name:"capjemini",date:new Date("2020-10-17"),attended_students:["klmnjai","hello","venkat","kpgon"]},
+{name:"Infosys",date:new Date("2020-09-30"),attended_students:["hello","kpgon","klmnjai","venkat","padma"]},
+{name:"zoho",date:new Date("2020-10-31"),attended_students:["appaiya","klmnjai","padma","venkat","chandra"]}])
+
+codekatta collection:
+db.codekata.insertMany([{user_id:101,details:[{category:"array",count:10},{category:"basics",count:20},{category:"string",count:12},{category:"dynamic_pro",count:10}]},{user_id:102,details:[{category:"string",count:10},{category:"array",count:20},{category:"dynamic_pro",count:15},
+{category:"vector",count:5}]},{user_id:103,details:[{category:"dynamic_pro",count:8},{category:"strings",count:10},{category:"matrix",count:15},{category:"array",count:20}]},
+{user_id:104,details:[{category:"array",count:12},{category:"string",count:13},{category:"dynamic_pro",count:15},{category:"Input",count:7}]}]);
+
+topics and task collection:
+db.topics.insertMany([{topic:"mysql",date:new Date("2020-10-17"),task_name:"task1",attended:[{name:"ganesh",attendence_status:'p',task_status:"done"},{name:"padma",attendence_status:'a',task_status:'done'},{name:"hello",attendence_status:'p',task_status:'done'}]},{topic:".net",date:new Date("2020-10-18"),task_name:"task12",attended:[{name:"padma",attendence_status:'p',task_status:'not'},{name:"hello",attendence_status:'p',task_status:'done'},{name:"venkat",attendence_status:'a',task_status:'not'}]},{topic:"c##",date:new Date("2020-10-25"),task_name:"task2",attended:[{name:"padma",attendence_status:'p',task_status:'done'},{name:"yogi",attendence_status:'a',task_status:'not'},{name:"chandra",attendence_status:'a',task_status:'not'}]},{topic:"js",date:new Date("2020-11-01"),task_name:"task31",attended:[{name:"padma",attendence_status:'p',task_status:'done'},{name:"lekha",attendence_status:'a',task_status:'not'},{name:"chandra",attendence_status:'p',task_status:'done'}]},{topic:"mernstack",date:new Date("2020-10-24"),task_name:"task3",attended:[{name:"ganesh",attendence_status:'p',task_status:'done'},{name:"kapil",attendence_status:'a',task_status:'not'},{name:"padma",attendence_status:'a',task_status:'not'}]},{topic:"angular.js",date:new Date("2020-10-26"),task_name:"task4",attended:[{name:"anu",attendence_status:'p',task_status:'done'},{name:"chandra",attendence_status:'p',task_status:'done'},{name:"padma ",attendence_status:'a',task_status:'not'}]}]);
+
+1.topics,tasks in october month:
+   db.topics.find({date:{$gte:new Date("2020-09-30"),$lt:new Date("2020-11-01")}});
+2.company_drives attended between 15-oct-2020 and 31-oct-2020
+   db.company_drive.find({date:{$gte:new Date("2020-10-14"),$lt:new Date("2020-11-1")}}); 
+3.all company drives and students appeared for placements
+   db.company_drive.find();
+4.no_of problems solved by each user in codekata
+   db.codekata.find().forEach(function(x)
+{print("User :"+x.user_id)
+ print(x.details)
+});
+ 
+6.no of students absent and not attend task between 2020-oct-15 and 2020-oct-31
+   var js=db.topics.find({ date: { $gte: new Date("2020-10-14"), $lt: new Date("2020-11-1")}}).forEach(
+function(x)
+{print(x.attended);});
+ 
